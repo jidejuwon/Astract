@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/',[AuthController::class,'userAuth'])->name('auth');
+Route::get('/home', [UserController::class,'index'])->name('home');
+Route::post('login',[AuthController::class,'userLogin'])->name('login');
+Route::post('logout',[AuthController::class,'userLogout'])->name('logout');
+Route::get('register',[AuthController::class,'registerUser'])->name('register');
+Route::post('create',[UserController::class,'create'])->name('create');
+Route::post('unverify/{id}',[UserController::class,'unverify'])->name('unverify');
+Route::post('verify/{id}',[UserController::class,'verify'])->name('verify');
+Route::post('delete/{id}',[UserController::class,'delete'])->name('delete');
+Route::post('send-message',[UserController::class,'sendMessage'])->name('sendMessage');
+
+
+
+Route::group(['prefix' => 'admin'],function(){
+    Route::get('/',[AuthController::class,'adminAuth'])->name('admin.auth');
+    Route::post('login',[AuthController::class,'adminLogin'])->name('admin.login');
+    Route::post('logout',[AuthController::class,'adminLogout'])->name('admin.logout');
+    Route::get('home',[AdminController::class,'index'])->name('admin.home');
+    Route::get('messages',[AdminController::class,'messages'])->name('user.messages');
+
 });
