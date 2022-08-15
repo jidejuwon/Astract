@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @include('inc.navbar')
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-@endsection
 @section('content')
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -29,8 +26,8 @@
                         @foreach($messages as $message)
                             <tr>
                                 <td> {{ $number }} </td>
-                                <td>{{ $message->created_at }}</td>
-                                <td>{{ $message->created_at }} </td>
+                                <td>{{ $message->date }}</td>
+                                <td>{{ $message->time }} </td>
                                 <td >{{ $message->message }}</td>
                             </tr>
                             @php

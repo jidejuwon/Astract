@@ -59,7 +59,7 @@ class UserController extends Controller
             'is_verified' => False,
             'status' => 'pending'
         ]);
-        return back()->with('error', 'Access denied!');
+        return back()->with('success', 'User Un-Verified successful');
     }
 
     public function delete($user_id){
@@ -71,32 +71,18 @@ class UserController extends Controller
         return back()->with('error', 'Access denied!');
     }
 
+
     public function index(){
-        $user_id = Auth()->id();
-        $message = Message::where('user_id',$user_id)
-            ->orderBy('created_at','desc')
+        $user_id  = Auth()->id();
+
+        $message = Message::where('user_id', $user_id)
+            ->orderBy('messages.created_at','desc')
+            ->join('users', 'users.id', '=','messages.user_id')
+            ->selectRaw("name, DATE(messages.created_at) as date, TIME(messages.created_at) as time, message")
             ->paginate(5);
         return view('user.index')->with('messages', $message);
     }
 
-    public function sendMessage(Request $request){
-        $validator = Validator::make($request->all(),[
-            'message' => 'required|string',
-        ]);
 
-        if($validator->fails()){
-            foreach($validator->errors()->all() as $error){
-                return back()->with('error', $error)->withInput();
-            }
-        }
-
-        $user_id = Auth()->id();
-        Message::create([
-            'user_id' => $user_id,
-            'message' => $request->message
-        ]);
-
-        return back()->with('success',"message sent to admin successful!");
-    }
 
 }

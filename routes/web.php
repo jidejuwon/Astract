@@ -19,7 +19,7 @@ use App\Http\Controllers\MessageController;
 
 
 Route::get('/sign-in',[AuthController::class,'userAuth'])->name('auth');
-Route::get('/', [MessageController::class,'userMessage'])->name('home');
+Route::get('/', [UserController::class,'index'])->name('home');
 Route::post('login',[AuthController::class,'userLogin'])->name('login');
 Route::post('logout',[AuthController::class,'userLogout'])->name('logout');
 Route::get('register',[AuthController::class,'registerUser'])->name('register');
@@ -27,7 +27,7 @@ Route::post('create',[UserController::class,'create'])->name('create');
 Route::post('unverify/{id}',[UserController::class,'unverify'])->name('unverify');
 Route::post('verify/{id}',[UserController::class,'verify'])->name('verify');
 Route::post('delete/{id}',[UserController::class,'delete'])->name('delete');
-Route::post('send-message',[UserController::class,'sendMessage'])->name('sendMessage');
+Route::post('send-message',[MessageController::class,'sendMessage'])->name('sendMessage');
 
 
 

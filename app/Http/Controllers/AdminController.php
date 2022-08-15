@@ -21,7 +21,7 @@ class AdminController extends Controller
                 ->leftjoin('messages','users.id' , '=', 'messages.user_id')
                 ->selectRaw("name, email, phone, IFNULL(COUNT(messages.id),0) as total, status, is_verified,users.created_at, users.id")
                 ->groupBy('email')
-                ->paginate(5);
+                ->paginate(10);
             return view('admin.index')->with('users',$user);
 
         }else if($status == "pending" or $status == "active"){
@@ -30,7 +30,7 @@ class AdminController extends Controller
                 ->leftjoin('messages','users.id' , '=', 'messages.user_id')
                 ->selectRaw("name, email, phone, IFNULL(COUNT(messages.id),0) as total, status, is_verified,users.created_at, users.id")
                 ->groupBy('email')
-                ->paginate(5);
+                ->paginate(50);
 
             return view('admin.index')->with(['users'=> $user,'status' => $status]);
 

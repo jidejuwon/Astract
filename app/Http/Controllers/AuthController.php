@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Admin;
 
 class AuthController extends Controller
 {
@@ -39,7 +40,7 @@ class AuthController extends Controller
             $user =  User::where('email',$request->email)->first();
             if($user->is_verified){
                 if(Auth::guard('user')->attempt($credentials)){
-                    return redirect()->route('home')->with('success',"welcome, $request->name");
+                    return redirect()->route('home')->with('success',"welcome, $user->name");
                 }
                 return back()->with('error',"Inavlid credentials!")->withInput();
             }
@@ -59,7 +60,8 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if(Auth::guard("admin")->attempt($credentials)){
-            return redirect()->route('admin.home')->with('success',"welcome, $request->name");
+            $admin = Admin::where('email',$request->email)->first();
+            return redirect()->route('admin.home')->with('success',"welcome, $admin->name");
         }
         return back()->with('error',"Inavlid Credentials")->withInput();
     }

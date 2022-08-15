@@ -1,9 +1,5 @@
 @extends('layouts.app')
 @include('inc.navbar2')
-
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-@endsection
 @section('content')
     <div class="table ">
         <div class="table-wrapper">
@@ -50,7 +46,7 @@
                                        <b style="color: red"> False </b>
                                     @endif
                                 </td>
-                                
+
                                 <td>  {{$user->total}} </td>
                                 <td>
                                     @if ($user->is_verified)
@@ -117,12 +113,12 @@
                                             <div class="modal-content">
                                                 <div class="modal-header flex-column">
                                                     <div class="icon-box">
-                                                        <i class="material-icons">clear</i>
+                                                        <i class="material-icons">check</i>
                                                     </div>
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>You are about to <strong class="text-danger">verify </strong>{{ $user->name }} .</p>
+                                                    <p>You are about to <strong class="text-success">verify </strong>{{ $user->name }} .</p>
                                                 </div>
                                                 <div class="modal-footer justify-content-center">
                                                     <form action="{{ route('verify', $user->id) }}" method="POST">
