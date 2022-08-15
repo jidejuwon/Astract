@@ -13,22 +13,31 @@ class AdminController extends Controller
         $this->middleware(['auth:admin']);
     }
 
-    public function index(){
-        $user = User::orderBy('total','desc')->orderBy('created_at','desc')
-            ->leftjoin('messages','users.id' , '=', 'messages.user_id')
-            ->selectRaw("name, email, phone, IFNULL(COUNT(messages.id),0) as total, status, is_verified,users.created_at, users.id")
-            ->groupBy('email')
-            ->paginate(5);;
-        return view('admin.index')->with('users',$user);
+    public function index(Request $request){
+        $status = strtolower($request->status);
+
+        if($status == ""){
+            $user = User::orderBy('total','desc')->orderBy('created_at','desc')
+                ->leftjoin('messages','users.id' , '=', 'messages.user_id')
+                ->selectRaw("name, email, phone, IFNULL(COUNT(messages.id),0) as total, status, is_verified,users.created_at, users.id")
+                ->groupBy('email')
+                ->paginate(5);
+            return view('admin.index')->with('users',$user);
+
+        }else if($status == "pending" or $status == "active"){
+
+            $user = User::where('status' , $status)->orderBy('total','desc')->orderBy('created_at','desc')
+                ->leftjoin('messages','users.id' , '=', 'messages.user_id')
+                ->selectRaw("name, email, phone, IFNULL(COUNT(messages.id),0) as total, status, is_verified,users.created_at, users.id")
+                ->groupBy('email')
+                ->paginate(5);
+
+            return view('admin.index')->with(['users'=> $user,'status' => $status]);
+
+        }else{
+            return back()->with('info', 'Filter only on user status')->withInput();
+        }
+
     }
-
-   public function messages(){
-        $message = Message::orderBy('messages.created_at','desc')
-            ->join('users', 'users.id', '=','messages.user_id')
-            ->selectRaw("name, DATE(messages.created_at) as date, TIME(messages.created_at) as time, message")
-            ->paginate(5);
-        return view('admin.message')->with('messages', $message);
-   }
-
 
 }

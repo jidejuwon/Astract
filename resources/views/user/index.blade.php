@@ -14,13 +14,13 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered" >
                 <thead>
                     <tr>
-                        <th>S/N </th>
+                        <th style="width: 5%">S/N </th>
                         <th >Date </th>
                         <th >Time </th>
-                        <th >Message </th>
+                        <th style="width: 60%">Message </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                                 <td> {{ $number }} </td>
                                 <td>{{ $message->created_at }}</td>
                                 <td>{{ $message->created_at }} </td>
-                                <td>{{ $message->message }}</td>
+                                <td >{{ $message->message }}</td>
                             </tr>
                             @php
                                 $number++;

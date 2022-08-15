@@ -73,7 +73,9 @@ class UserController extends Controller
 
     public function index(){
         $user_id = Auth()->id();
-        $message = Message::where('user_id',$user_id)->orderBy('created_at','desc')->paginate(5);
+        $message = Message::where('user_id',$user_id)
+            ->orderBy('created_at','desc')
+            ->paginate(5);
         return view('user.index')->with('messages', $message);
     }
 

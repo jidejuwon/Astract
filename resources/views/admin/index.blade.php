@@ -5,14 +5,22 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 @endsection
 @section('content')
-    <div class="table-responsive">
+    <div class="table ">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8"><h2>User <b>Details</b></h2></div>
+                    <div class="col-sm-4">
+                        <form action="{{ route('admin.home') }}" method="GET">
+                            <div style="display:flex; flex-direction:row; row-gap: space-evenly;float:right;">
+                                <input type="text" name="status" value="{{ $status ?? "" }}" class="form-control" style="width:60%;"/>
+                                <button type="submit" class="btn btn-info "> Search </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <table class="table table-bordered">
+            <table class="table  table-bordered">
                 <thead>
                     <tr>
                         <th>S/N </th>
@@ -21,8 +29,7 @@
                         <th >Email </th>
                         <th >Status </th>
                         <th >Verified </th>
-                        <th >Date Joined </th>
-                        <th > Total Messages </th>
+                        <th >Total Messages </th>
                         <th >Actions </th>
                     </tr>
                 </thead>
@@ -43,7 +50,7 @@
                                        <b style="color: red"> False </b>
                                     @endif
                                 </td>
-                                <td> {{ $user->created_at }}</td>
+                                
                                 <td>  {{$user->total}} </td>
                                 <td>
                                     @if ($user->is_verified)

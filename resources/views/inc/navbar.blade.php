@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg  bg-dark">
-    <a class="navbar-brand" href="{{ url('/') }}"><strong class='text-warning'>Astract</strong></a>
+    <a class="navbar-brand" href="{{ url('/') }}"><strong class='text-warning'>SEMREM</strong><small class='text-default'>college</small></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         {{-- left side of navbar --}}

@@ -10,7 +10,8 @@ class AuthController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('guest')->except(['adminLogout','userLogout']);
+        $this->middleware('auth:user')->only(['userLogout']);
+        $this->middleware('auth:admin')->only(['adminLogout']);
     }
 
     public function userAuth(){

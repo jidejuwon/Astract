@@ -14,11 +14,11 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>S/N </th>
+                        <th style="width: 5%">S/N </th>
                         <th>Full Name </th>
                         <th >Date </th>
                         <th >Time </th>
-                        <th >Message </th>
+                        <th style="width: 60%">Message </th>
                     </tr>
                 </thead>
                 <tbody>

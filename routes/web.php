@@ -18,8 +18,8 @@ use App\Http\Controllers\MessageController;
 */
 
 
-Route::get('/',[AuthController::class,'userAuth'])->name('auth');
-Route::get('/home', [UserController::class,'index'])->name('home');
+Route::get('/sign-in',[AuthController::class,'userAuth'])->name('auth');
+Route::get('/', [MessageController::class,'userMessage'])->name('home');
 Route::post('login',[AuthController::class,'userLogin'])->name('login');
 Route::post('logout',[AuthController::class,'userLogout'])->name('logout');
 Route::get('register',[AuthController::class,'registerUser'])->name('register');
@@ -36,6 +36,7 @@ Route::group(['prefix' => 'admin'],function(){
     Route::post('login',[AuthController::class,'adminLogin'])->name('admin.login');
     Route::post('logout',[AuthController::class,'adminLogout'])->name('admin.logout');
     Route::get('home',[AdminController::class,'index'])->name('admin.home');
-    Route::get('messages',[AdminController::class,'messages'])->name('user.messages');
+    // Route::get('home',[AdminController::class,'filterIndex'])->name('admin.home.filter');
+    Route::get('messages',[MessageController::class,'messages'])->name('user.messages');
 
 });
