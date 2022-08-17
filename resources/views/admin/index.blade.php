@@ -19,10 +19,10 @@
             <table class="table  table-bordered">
                 <thead>
                     <tr>
-                        <th>S/N </th>
+                        <th tyle="width: 5%">S/N </th>
                         <th >Full Name</th>
                         <th >Phone No.</th>
-                        <th >Email </th>
+                        <th tyle="width: 25%">Email </th>
                         <th >Status </th>
                         <th >Verified </th>
                         <th >Total Messages </th>
