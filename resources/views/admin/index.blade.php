@@ -9,7 +9,7 @@
                     <div class="col-sm-4">
                         <form action="{{ route('admin.home') }}" method="GET">
                             <div style="display:flex; flex-direction:row; row-gap: space-evenly;float:right;">
-                                <input type="text" name="status" value="{{ $status ?? "" }}" class="form-control" style="width:60%;"/>
+                                <input type="text" name="status" placeholder="Filter by status" value="{{ $status ?? "" }}" class="form-control" style="width:60%;"/>
                                 <button type="submit" class="btn btn-info "> Search </button>
                             </div>
                         </form>
