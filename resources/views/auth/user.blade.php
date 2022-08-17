@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('css')
-    <link rel="stylesheet" href="{{ secure_asset("css/login.css") }}">
+    @production
+        <link rel="stylesheet" href="{{ secure_asset("css/login.css") }}">
+    @endproduction
+    <link rel="stylesheet" href="{{ asset("css/login.css") }}">
 @endsection
 
 @section('content')
