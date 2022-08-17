@@ -35,7 +35,7 @@
 
     <script>
         $(document).ready(function() {
-            toastr.options.timeOut = 10000;
+            toastr.options.timeOut = 5000;
             toastr.options.closeButton = true;
             toastr.options.progressBar = true;
             @if (Session::has('error'))
