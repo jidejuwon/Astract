@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,8 @@ Route::group(['prefix' => 'admin'],function(){
     Route::post('login',[AuthController::class,'adminLogin'])->name('admin.login');
     Route::post('logout',[AuthController::class,'adminLogout'])->name('admin.logout');
     Route::get('home',[AdminController::class,'index'])->name('admin.home');
-    // Route::get('home',[AdminController::class,'filterIndex'])->name('admin.home.filter');
+    Route::get('category',[CategoryController::class,'index'])->name('admin.category');
+    Route::post('create-category',[CategoryController::class,'store'])->name('admin.create-category');
     Route::get('messages',[MessageController::class,'messages'])->name('user.messages');
 
 });

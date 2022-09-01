@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('css')
-    <link rel="stylesheet" href="{{ asset("css/login.css") }}">
+    @if ( env('APP_ENV') != 'local')
+        <link rel="stylesheet" href="{{ secure_asset("css/login.css") }}">
+    @else
+        <link rel="stylesheet" href="{{ asset("css/login.css") }}">
+    @endif
 @endsection
 
 @section('content')
