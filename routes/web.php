@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TaskController;
 use App\Models\Category;
 
 /*
@@ -30,6 +31,11 @@ Route::post('unverify/{id}',[UserController::class,'unverify'])->name('unverify'
 Route::post('verify/{id}',[UserController::class,'verify'])->name('verify');
 Route::post('delete/{id}',[UserController::class,'delete'])->name('delete');
 Route::post('send-message',[MessageController::class,'sendMessage'])->name('sendMessage');
+
+Route::get('task',[TaskController::class,'index'])->name('task');
+Route::post('create-task',[TaskController::class,'store'])->name('create-task');
+Route::post('update-task',[TaskController::class,'update'])->name('update-task');
+Route::post('destroy-task',[TaskController::class,'destroy'])->name('delete-task');
 
 
 

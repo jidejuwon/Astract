@@ -33,38 +33,9 @@
                                 <td>{{ ucfirst($cat->status) }}</td>
                                 <td>
 
-                                        <a  data-toggle="modal" data-target="#update-{{ $number }}"><i class="fa fa-edit" title="update" style="color: green;font-size: 30px" aria-hidden="true"></i> </a>
-
-
-                                        {{-- <a  data-toggle="modal" data-target="#verify-{{ $number }}"><i class="fa fa-check-circle" title="verify" style="color: green;font-size: 30px" aria-hidden="true"></i></a> --}}
-
+                                    <a  data-toggle="modal" data-target="#update-{{ $number }}"><i class="fa fa-edit" title="update" style="color: green;font-size: 30px" aria-hidden="true"></i> </a>
 
                                     <a  data-toggle="modal" data-target="#delete-{{ $number }}"><i class="fa fa-trash" title="Delete" style="color: red;font-size: 30px" aria-hidden="true"></i></a>
-
-                                    <!-- unverify Modal HTML -->
-                                    {{-- <div class="modal fade" id="update-{{ $number }}">
-                                        <div class="modal-dialog modal-delete">
-                                            <div class="modal-content">
-                                                <div class="modal-header flex-column">
-                                                    <div class="icon-box">
-                                                        <i class="material-icons">clear</i>
-                                                    </div>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>You are about to <strong class="text-danger"> update </strong> {{  $cat->title }}.</p>
-                                                </div>
-                                                <div class="modal-footer justify-content-center">
-                                                    <form action="{{ route('admin.update-category') }}" method="POST">
-                                                        @method('POST')@csrf
-
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                        <button type="submit" class="btn btn-danger">Update</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
 
                                     <div class="modal" id="update-{{$number}}" tabindex="-1" role="dialog">
                                         <form action="{{ route('admin.update-category') }}" method="POST">
@@ -135,9 +106,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
+                                </td>
                             </tr>
                             @php
                                 $number++;

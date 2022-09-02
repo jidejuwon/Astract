@@ -10,7 +10,7 @@
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
                 <li>
-                    <a id="navbarDropdown" class="nav-link" href="{{ route('user.messages') }}" role="button" aria-expanded="false" v-pre>
+                    <a id="navbarDropdown" class="nav-link" href="{{ route('task') }}" role="button" aria-expanded="false" v-pre>
                         Tasks
                     </a>
                 </li>
