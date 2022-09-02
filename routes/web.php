@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::group(['prefix' => 'admin'],function(){
     Route::get('home',[AdminController::class,'index'])->name('admin.home');
     Route::get('category',[CategoryController::class,'index'])->name('admin.category');
     Route::post('create-category',[CategoryController::class,'store'])->name('admin.create-category');
+    Route::post('update-category',[CategoryController::class,'update'])->name('admin.update-category');
+    Route::post('delete-category',[CategoryController::class,'destroy'])->name('admin.delete-category');
     Route::get('messages',[MessageController::class,'messages'])->name('user.messages');
 
 });

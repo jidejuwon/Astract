@@ -39,4 +39,26 @@ class CategoryController extends Controller
 
         return back()->with('success',"category create successful!");
     }
+
+    public function update(Request $request){
+        $validator = Validator::make($request->all(),[
+            'cat_id' => 'required|string',
+            'status' => 'required|string|in:pending,done,overdue'
+        ]);
+
+        if($validator->fails()){
+            foreach($validator->errors()->all() as $error){
+                return back()->with('error', $error)->withInput();
+            }
+        }
+
+        Category::where('id',$request->cat_id)->update(['status'=>$request->status]);
+        return back()->with('success',"category update successful!");
+    }
+
+    public function destroy(Request $request){
+
+        Category::where('id', $request->cat_id)->delete();
+        return back()->with('success',"category delete successful!");
+    }
 }

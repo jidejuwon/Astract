@@ -31,7 +31,112 @@
                                 <td> {{ $number }} </td>
                                 <td> {{$cat->title}} </td>
                                 <td>{{ ucfirst($cat->status) }}</td>
-                                <td> Action </td>
+                                <td>
+
+                                        <a  data-toggle="modal" data-target="#update-{{ $number }}"><i class="fa fa-edit" title="update" style="color: green;font-size: 30px" aria-hidden="true"></i> </a>
+
+
+                                        {{-- <a  data-toggle="modal" data-target="#verify-{{ $number }}"><i class="fa fa-check-circle" title="verify" style="color: green;font-size: 30px" aria-hidden="true"></i></a> --}}
+
+
+                                    <a  data-toggle="modal" data-target="#delete-{{ $number }}"><i class="fa fa-trash" title="Delete" style="color: red;font-size: 30px" aria-hidden="true"></i></a>
+
+                                    <!-- unverify Modal HTML -->
+                                    {{-- <div class="modal fade" id="update-{{ $number }}">
+                                        <div class="modal-dialog modal-delete">
+                                            <div class="modal-content">
+                                                <div class="modal-header flex-column">
+                                                    <div class="icon-box">
+                                                        <i class="material-icons">clear</i>
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>You are about to <strong class="text-danger"> update </strong> {{  $cat->title }}.</p>
+                                                </div>
+                                                <div class="modal-footer justify-content-center">
+                                                    <form action="{{ route('admin.update-category') }}" method="POST">
+                                                        @method('POST')@csrf
+
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-danger">Update</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+
+                                    <div class="modal" id="update-{{$number}}" tabindex="-1" role="dialog">
+                                        <form action="{{ route('admin.update-category') }}" method="POST">
+                                        @csrf
+                                            <div class="modal-dialog modal-ml" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"><small>update</small> <strong>{{$cat->title}}</strong> category</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="auto-form-wrapper">
+
+                                                            <div class="form-group">
+
+                                                                <div class="input-group">
+                                                                    <input placeholder="new category" class="form-control" name="cat_id" value="{{$cat->id}}" id='cat_id' hidden/>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="input-group" >
+                                                                <select name='status' id='status' style="width:100%;height:50px;" class="form-control">
+                                                                    <option selected value="{{$cat->status}}"> {{ucfirst($cat->status)}}</option>
+                                                                    <option disabled>=============================================</option>
+                                                                    <option disabled></option>
+                                                                    <option value="pending">Pending</option>
+                                                                    <option value="done">Done</option>
+                                                                    <option value="overdue">Over Due</option>
+
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <!-- delete Modal HTML -->
+                                    <div class="modal fade" id="delete-{{ $number }}">
+                                        <div class="modal-dialog modal-delete">
+                                            <div class="modal-content">
+                                                <div class="modal-header flex-column">
+                                                    <div class="icon-box">
+                                                        <i class="material-icons">clear</i>
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>You are about to <strong class="text-danger"> delete </strong> {{  $cat->title }} records.</p>
+                                                </div>
+                                                <div class="modal-footer justify-content-center">
+                                                    <form action="{{ route('admin.delete-category', $cat->id) }}" method="POST">
+                                                        @method('POST')@csrf
+                                                        <input type="text" hidden value="{{$cat->id}}" name="cat_id" required>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
 
                             </tr>
                             @php
