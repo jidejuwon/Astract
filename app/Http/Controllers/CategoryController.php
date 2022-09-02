@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
             'title' => 'required|string',
-            'status' => 'required|string|in:pending,done,overdue,active'
+            'status' => 'required|string|in:inactive,active'
         ]);
 
         if($validator->fails()){
