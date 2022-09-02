@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Task;
 use App\Models\Message;
 
 class AdminController extends Controller
@@ -38,6 +39,23 @@ class AdminController extends Controller
             return back()->with('info', 'Filter only on user status')->withInput();
         }
 
+    }
+
+    public function analysis(){
+        $result['pending'] = self::taskAnalysis('pending');
+        $result['done'] = self::taskAnalysis('done');
+        $result['overdue'] = self::taskAnalysis('overdue');
+
+        // dd($result);
+
+        $user  = User::all()->count();
+
+        return view('admin.analysis')->with(['task' => $result, 'users' => $user]);
+    }
+
+    private function taskAnalysis($status){
+        $task = Task::where('status',$status)->count();
+        return (int)$task;
     }
 
 }

@@ -14,7 +14,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:user')->only(['index','sendMessage']);
-        $this->middleware('auth:admin')->only(['verify','unverify','delete']);
+        $this->middleware('auth:admin')->only(['verify','unverify','delete','users']);
     }
 
     public function create(Request $request){
@@ -82,7 +82,6 @@ class UserController extends Controller
             ->paginate(5);
         return view('user.index')->with('messages', $message);
     }
-
 
 
 }

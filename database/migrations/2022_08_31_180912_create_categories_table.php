@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->enum('status',['pending','done','overdue']);
+            $table->enum('status',['active','inactive']);
             $table->timestamps();
         });
     }

@@ -36,6 +36,7 @@ Route::get('task',[TaskController::class,'index'])->name('task');
 Route::post('create-task',[TaskController::class,'store'])->name('create-task');
 Route::post('update-task',[TaskController::class,'update'])->name('update-task');
 Route::post('destroy-task',[TaskController::class,'destroy'])->name('delete-task');
+Route::get('task-analysis',[TaskController::class,'analysis'])->name('task.analysis');
 
 
 
@@ -48,6 +49,10 @@ Route::group(['prefix' => 'admin'],function(){
     Route::post('create-category',[CategoryController::class,'store'])->name('admin.create-category');
     Route::post('update-category',[CategoryController::class,'update'])->name('admin.update-category');
     Route::post('delete-category',[CategoryController::class,'destroy'])->name('admin.delete-category');
-    Route::get('messages',[MessageController::class,'messages'])->name('user.messages');
+    Route::get('messages',[MessageController::class,'messages'])->name('admin.messages');
+    Route::get('tasks',[TaskController::class,'userTask'])->name('admin.tasks');
+    Route::post('update-tasks',[TaskController::class,'updateTask'])->name('admin.update-task');
+    Route::post('delete-tasks',[TaskController::class,'destroyTask'])->name('admin.delete-task');
+    Route::get('analysis',[AdminController::class,'analysis'])->name('admin.analysis');
 
 });

@@ -10,12 +10,23 @@
         <ul class="navbar-nav ml-auto">
 
             <li>
-                <a id="navbarDropdown" class="nav-link" href="{{ route('user.messages') }}" role="button" aria-expanded="false" v-pre>
+                <a id="navbarDropdown" class="nav-link" href="{{ route('admin.home') }}" role="button" aria-expanded="false" v-pre>
+                    Users
+                </a>
+            </li>
+            <li>
+                <a id="navbarDropdown" class="nav-link" href="{{ route('admin.analysis') }}" role="button" aria-expanded="false" v-pre>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a id="navbarDropdown" class="nav-link" href="{{ route('admin.messages') }}" role="button" aria-expanded="false" v-pre>
                     Messages
                 </a>
             </li>
             <li>
-                <a id="navbarDropdown" class="nav-link" href="{{ route('user.messages') }}" role="button" aria-expanded="false" v-pre>
+                <a id="navbarDropdown" class="nav-link" href="{{ route('admin.tasks') }}" role="button" aria-expanded="false" v-pre>
                     Tasks
                 </a>
             </li>

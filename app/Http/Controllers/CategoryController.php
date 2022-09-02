@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Models\Task;
 
 class CategoryController extends Controller
 {
@@ -23,7 +24,7 @@ class CategoryController extends Controller
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
             'title' => 'required|string',
-            'status' => 'required|string|in:pending,done,overdue'
+            'status' => 'required|string|in:pending,done,overdue,active'
         ]);
 
         if($validator->fails()){
@@ -43,7 +44,7 @@ class CategoryController extends Controller
     public function update(Request $request){
         $validator = Validator::make($request->all(),[
             'cat_id' => 'required|string',
-            'status' => 'required|string|in:pending,done,overdue'
+            'status' => 'required|string|in:inactive,active'
         ]);
 
         if($validator->fails()){
@@ -59,6 +60,7 @@ class CategoryController extends Controller
     public function destroy(Request $request){
 
         Category::where('id', $request->cat_id)->delete();
+        Task::where('category_id',$request->cat_id)->delete();
         return back()->with('success',"category delete successful!");
     }
 }

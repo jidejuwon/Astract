@@ -13,17 +13,29 @@ class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:user']);
+        $this->middleware(['auth:user'],['except' => ['userTask','destroyTask','updateTask']]);
+        $this->middleware(['auth:admin'],['only' => ['userTask','destroyTask','updateTask']]);
+
     }
 
     public function index(){
         $task = Task::where('user_id',Auth::user()->id)
             ->join('categories','tasks.category_id','=','categories.id')
-            ->addselect(DB::raw('categories.title as cat_title'),'tasks.title as title','deadline','tasks.status as status','tasks.id as id')
+            ->addselect('categories.title as cat_title','tasks.title as title','deadline','tasks.status as status','tasks.id as id')
             ->orderBy('tasks.created_at','desc')
             ->paginate(5);
-        $category = Category::get(['id','title']);
+        $category = Category::where('status','active')->get(['id','title']);
         return view('user.task')->with(['tasks' => $task,'category' => $category]);
+    }
+
+    public function userTask(){
+        $task = Task::orderBy('tasks.created_at','desc')
+            ->join('users','users.id','=','tasks.user_id')
+            ->join('categories','categories.id','=','tasks.category_id')
+            ->addSelect('tasks.title as title','categories.title as category','name','deadline','tasks.status as status','tasks.id as id')
+            ->paginate(5);
+
+        return view('admin.task')->with(['tasks' => $task]);
     }
 
     public function store(Request $request){
@@ -67,10 +79,48 @@ class TaskController extends Controller
         return back()->with('success',"category update successful!");
     }
 
+    public function updateTask(Request $request){
+        $validator = Validator::make($request->all(),[
+            'task_id' => 'required|string',
+            'status' => 'required|string|in:pending,done,overdue'
+        ]);
+
+        if($validator->fails()){
+            foreach($validator->errors()->all() as $error){
+                return back()->with('error', $error)->withInput();
+            }
+        }
+
+        Task::where('id',$request->task_id)->update(['status'=>$request->status]);
+        return back()->with('success',"category update successful!");
+    }
+
     public function destroy(Request $request){
 
         Task::where('id', $request->task_id)->delete();
         return back()->with('success',"category delete successful!");
+    }
+
+    public function destroyTask(Request $request){
+
+        Task::where('id', $request->task_id)->delete();
+        return back()->with('success',"category delete successful!");
+    }
+
+
+
+    public function analysis(){
+        $result['pending'] = self::taskAnalysis('pending');
+        $result['done'] = self::taskAnalysis('done');
+        $result['overdue'] = self::taskAnalysis('overdue');
+
+
+        return view('user.analysis')->with(['task' => $result]);
+    }
+
+    private function taskAnalysis($status){
+        $task = Task::where(['status' => $status, "user_id" => Auth::user()->id])->count();
+        return (int)$task;
     }
 
 
